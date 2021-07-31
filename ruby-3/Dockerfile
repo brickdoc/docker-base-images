@@ -4,6 +4,12 @@ ARG RUBY_VERSION="3.0-jemalloc"
 # RUN with pipe recommendation: https://github.com/hadolint/hadolint/wiki/DL4006
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+ENV BUNDLE_SILENCE_ROOT_WARNING=1 \
+  RUBY_VERSION=${RUBY_VERSION} \
+  LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+ENV PATH /usr/lib/fullstaq-ruby/versions/${RUBY_VERSION}/bin:$PATH
+
 RUN apt-get update -q \
   && apt-get dist-upgrade --assume-yes \
   && apt-get install --assume-yes -q --no-install-recommends \
@@ -18,20 +24,13 @@ RUN apt-get update -q \
   && apt-get update -q \
   && apt-get install --assume-yes -q --no-install-recommends fullstaq-ruby-${RUBY_VERSION} \
   libcurl4-openssl-dev libpq-dev libxml2-dev libxslt-dev\
+  && apt-get remove -y --purge gnupg apt-transport-https \
   && apt-get autoremove --assume-yes \
   && rm -rf /var/lib/apt/lists \
   && rm -fr /var/cache/apt \
   && rm /etc/apt/sources.list.d/fullstaq-ruby.list \
-  && rm /etc/apt/sources.list.d/postgres.list
-
-ENV GEM_HOME /usr/local/bundle
-ENV BUNDLE_PATH="$GEM_HOME" \
-  BUNDLE_SILENCE_ROOT_WARNING=1 \
-  BUNDLE_APP_CONFIG="$GEM_HOME" \
-  RUBY_VERSION=${RUBY_VERSION} \
-  LANG=C.UTF-8 LC_ALL=C.UTF-8
-
-# path recommendation: https://github.com/bundler/bundler/pull/6469#issuecomment-383235438
-ENV PATH $GEM_HOME/bin:$BUNDLE_PATH/gems/bin:/usr/lib/fullstaq-ruby/versions/${RUBY_VERSION}/bin:$PATH
+  && rm /etc/apt/sources.list.d/postgres.list \
+  && echo 'gem: --no-rdoc --no-ri' >> "$HOME/.gemrc"  && \
+  bundle config set --global deployment 'true'
 
 CMD [ "irb" ]
