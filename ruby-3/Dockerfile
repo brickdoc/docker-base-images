@@ -7,7 +7,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV BUNDLE_SILENCE_ROOT_WARNING=1 \
   RUBY_VERSION=${RUBY_VERSION} \
   LANG=C.UTF-8 LC_ALL=C.UTF-8
-
 ENV PATH /usr/lib/fullstaq-ruby/versions/${RUBY_VERSION}/bin:$PATH
 
 RUN apt-get update -q \
