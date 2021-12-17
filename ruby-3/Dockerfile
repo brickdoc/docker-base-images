@@ -22,7 +22,7 @@ RUN apt-get update -q \
   && echo "deb https://apt.fullstaqruby.org ubuntu-20.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list \
   && apt-get update -q \
   && apt-get install --assume-yes -q --no-install-recommends fullstaq-ruby-${RUBY_VERSION} \
-  libcurl4-openssl-dev libpq-dev libxml2-dev libsodium23 libxslt-dev\
+  libcurl4-openssl-dev rustc libpq-dev libxml2-dev libsodium23 libxslt-dev\
   && apt-get remove -y --purge gnupg apt-transport-https \
   && apt-get autoremove --assume-yes \
   && rm -rf /var/lib/apt/lists \
