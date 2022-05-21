@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-ARG RUBY_VERSION="3.0.3"
+ARG RUBY_VERSION="3.1.2-jemalloc"
 
 # RUN with pipe recommendation: https://github.com/hadolint/hadolint/wiki/DL4006
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
