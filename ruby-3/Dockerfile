@@ -20,7 +20,7 @@ ENV BUNDLE_SILENCE_ROOT_WARNING=1 \
   LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /usr/lib/fullstaq-ruby/versions/${RUBY_VERSION}/bin:$PATH
 
-COPY --from=builder /usr/lib/jemalloc.so.2 /usr/lib/jemalloc.so.2
+COPY --from=builder /usr/lib/libjemalloc.so.2 /usr/lib/libjemalloc.so.2
 RUN apt-get update -q \
   && apt-get dist-upgrade --assume-yes \
   && apt-get install --assume-yes -q --no-install-recommends \
