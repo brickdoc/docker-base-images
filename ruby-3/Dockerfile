@@ -29,8 +29,12 @@ RUN apt-get update -q \
   && echo 'gem: --no-rdoc --no-ri' >> "$HOME/.gemrc"  && \
   bundle config set --global deployment 'true'
 
-ENV GEM_HOME /app/bundle
-ENV BUNDLE_APP_CONFIG="$GEM_HOME" \
-  BUNDLE_PATH="$GEM_HOME" \
-  BUNDLE_WITHOUT="test development"
+ENV GEM_HOME /usr/local/bundle
+ENV BUNDLE_PATH="$GEM_HOME" \
+    BUNDLE_SILENCE_ROOT_WARNING=1 \
+    BUNDLE_APP_CONFIG="$GEM_HOME" \
+    RUBY_VERSION=3.1 \
+    LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+RUN gem install rake
 CMD [ "irb" ]
