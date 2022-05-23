@@ -16,16 +16,16 @@ RUN apt-get update -q \
   gnupg \
   apt-transport-https \
   ca-certificates \
-  && curl -SLf https://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add - \
-  && curl -SLf https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/main/fullstaq-ruby.asc | apt-key add - \
+  && curl -SLf https://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | gpg --dearmour -o /etc/apt/trusted.gpg.d/postgresql.gpg \
+  && curl -SLf https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/main/fullstaq-ruby.asc |  gpg --dearmour -o /etc/apt/trusted.gpg.d/fullstaq.gpg \
   && echo "deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main" > /etc/apt/sources.list.d/postgres.list \
   && echo "deb https://apt.fullstaqruby.org ubuntu-22.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list \
-  && apt-get update -q \
-  && apt-get install --assume-yes -q --no-install-recommends fullstaq-ruby-${RUBY_VERSION} \
-  libcurl4-openssl-dev libpq-dev libxml2-dev libsodium23 libxslt-dev\
+  && apt-get update -q
+  RUN apt-get install --assume-yes -q --no-install-recommends fullstaq-ruby-${RUBY_VERSION} \
+  libcurl4-openssl-dev libpq-dev libxml2-dev libsodium23 libxslt-dev \
   && apt-get remove -y --purge gnupg apt-transport-https \
-  && apt-get autoremove --assume-yes \
-  && rm -rf /var/lib/apt/lists \
+  && apt-get autoremove --assume-yes
+  RUN rm -rf /var/lib/apt/lists \
   && rm -fr /var/cache/apt \
   && rm /etc/apt/sources.list.d/fullstaq-ruby.list \
   && rm /etc/apt/sources.list.d/postgres.list \
