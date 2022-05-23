@@ -26,7 +26,6 @@ RUN apt-get update -q \
   RUN rm -rf /var/lib/apt/lists \
   && rm -fr /var/cache/apt \
   && rm /etc/apt/sources.list.d/fullstaq-ruby.list \
-  && rm /etc/apt/sources.list.d/postgres.list \
   && echo 'gem: --no-rdoc --no-ri' >> "$HOME/.gemrc"  && \
   bundle config set --global deployment 'true'
 
