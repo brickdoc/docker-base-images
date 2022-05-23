@@ -1,8 +1,6 @@
 # RUN with pipe recommendation: https://github.com/hadolint/hadolint/wiki/DL4006
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ENV JEMALLOC_VERSION=${JEMALLOC_VERSION}
-
 RUN apt-get update && apt-get install --no-install-recommends -y gcc unzip build-essential bzip2 curl \
     && curl -s -L https://github.com/jemalloc/jemalloc/releases/download/5.3.0/jemalloc-5.3.0.tar.bz2 -o jemalloc.tar.bz2 \
      && tar xjf ./jemalloc.tar.bz2 \
