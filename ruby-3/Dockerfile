@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y gcc ca-certific
   && curl -s -L https://github.com/jemalloc/jemalloc/releases/download/5.3.0/jemalloc-5.3.0.tar.bz2 -o jemalloc.tar.bz2 \
   && tar xjf ./jemalloc.tar.bz2  \
   && cd jemalloc-5.3.0 && ./configure  --with-malloc-conf='background_thread:true,metadata_thp:auto' && make
-RUN mv jemalloc-5.3.0/lib/libjemalloc.so.2 /usr/lib
+RUN cp jemalloc-5.3.0/lib/libjemalloc.so.2 /usr/lib/libjemalloc.so.2
 
 
 FROM ubuntu:22.04
