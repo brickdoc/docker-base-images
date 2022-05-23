@@ -1,3 +1,4 @@
+FROM ubuntu:22.04
 # RUN with pipe recommendation: https://github.com/hadolint/hadolint/wiki/DL4006
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
