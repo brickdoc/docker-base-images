@@ -4,9 +4,9 @@ ARG JEMALLOC_VERSION="5.3.0"
 RUN apt-get update && apt-get install --no-install-recommends -y unzip build-essential bzip2 curl \
     && curl -s -L https://github.com/jemalloc/jemalloc/releases/download/${JEMALLOC_VERSION}/jemalloc-${JEMALLOC_VERSION}.tar.bz2 -o jemalloc.tar.bz2 \
      && tar xjf ./jemalloc.tar.bz2 \
-    && cd jemalloc-${JEMALLOC_VERSION} \
-    && ./configure  --with-malloc-conf='background_thread:true,metadata_thp:auto' \
-    && make  && mv lib/libjemalloc.so.2 /usr/lib
+    && cd jemalloc-${JEMALLOC_VERSION}
+RUN ./configure  --with-malloc-conf='background_thread:true,metadata_thp:auto' && make 
+RUN mv lib/libjemalloc.so.2 /usr/lib
 
 
 
