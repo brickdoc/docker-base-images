@@ -16,9 +16,7 @@ RUN apt-get update -q \
   gnupg \
   apt-transport-https \
   ca-certificates \
-  && curl -SLf https://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | gpg --dearmour -o /etc/apt/trusted.gpg.d/postgresql.gpg \
   && curl -SLf https://raw.githubusercontent.com/fullstaq-labs/fullstaq-ruby-server-edition/main/fullstaq-ruby.asc |  gpg --dearmour -o /etc/apt/trusted.gpg.d/fullstaq.gpg \
-  && echo "deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main" > /etc/apt/sources.list.d/postgres.list \
   && echo "deb https://apt.fullstaqruby.org ubuntu-22.04 main" > /etc/apt/sources.list.d/fullstaq-ruby.list \
   && apt-get update -q
   RUN apt-get install --assume-yes -q --no-install-recommends fullstaq-ruby-${RUBY_VERSION} \
