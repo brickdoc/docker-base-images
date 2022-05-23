@@ -1,7 +1,7 @@
 FROM ubuntu:22.04 as builder
 ARG JEMALLOC_VERSION="5.3.0"
 
-RUN apt-get update && apt-get install --no-install-recommends -y unzip build-essential bzip2 curl \
+RUN apt-get update && apt-get install --no-install-recommends -y pwgen gcc unzip build-essential bzip2 curl \
     && curl -s -L https://github.com/jemalloc/jemalloc/releases/download/${JEMALLOC_VERSION}/jemalloc-${JEMALLOC_VERSION}.tar.bz2 -o jemalloc.tar.bz2 \
      && tar xjf ./jemalloc.tar.bz2 \
     && cd jemalloc-${JEMALLOC_VERSION}
