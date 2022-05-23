@@ -1,7 +1,8 @@
 FROM ubuntu:22.04 as builder
 ARG JEMALLOC_VERSION="5.3.0"
+ENV JEMALLOC_VERSION=￥{JEMALLOC_VERSION}
 
-RUN apt-get update && apt-get install --no-install-recommends -y pwgen gcc unzip build-essential bzip2 curl \
+RUN apt-get update && apt-get install --no-install-recommends -y gcc unzip build-essential bzip2 curl \
     && curl -s -L https://github.com/jemalloc/jemalloc/releases/download/${JEMALLOC_VERSION}/jemalloc-${JEMALLOC_VERSION}.tar.bz2 -o jemalloc.tar.bz2 \
      && tar xjf ./jemalloc.tar.bz2 \
     && cd jemalloc-${JEMALLOC_VERSION}
@@ -46,7 +47,6 @@ ENV GEM_HOME /usr/local/bundle
 ENV BUNDLE_PATH="$GEM_HOME" \
     BUNDLE_SILENCE_ROOT_WARNING=1 \
     BUNDLE_APP_CONFIG="$GEM_HOME" \
-    RUBY_VERSION=${RUBY_VERSION} \
     LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 RUN gem install rake
