@@ -36,7 +36,7 @@ jobs:
           context: ./ruby-3
           file: ./ruby-3/Dockerfile
           push: true
-          tags: ghcr.io/brickdoc/ruby-3:latest
+          tags: ghcr.io/pleisto/ruby-3:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
         # Temp fix
